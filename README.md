@@ -1,4 +1,5 @@
 # Playbooks
+> Ansible playbooks collection
 
 ## playbook.yml
 
@@ -13,6 +14,6 @@
 * nginx
 * mongodb
 
-## node-pkg-playbook.yml
-| install node from package
+## node-playbook.yml
+> install node from package
 
