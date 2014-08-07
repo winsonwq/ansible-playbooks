@@ -17,3 +17,6 @@
 ## node-playbook.yml
 > install node from package
 
+## ufw-playbook.yml
+> install ufw (Uncomplicated Firewall) using `apt-get`
+

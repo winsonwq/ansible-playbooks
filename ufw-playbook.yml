@@ -1,0 +1,21 @@
+---
+- hosts: playground
+  remote_user: root
+  sudo: yes
+  tasks:
+
+# install basic tools
+  - name: install UFW - Uncomplicated Firewall
+    apt: name=ufw state=latest update_cache=yes
+
+  - name: set logging
+    ufw: logging=on
+
+  - name: allow port 22
+    ufw: rule=allow port=22
+
+  - name: allow port 80
+    ufw: rule=allow port=80
+
+  - name: enable ufw
+    ufw: state=enabled policy=allow
