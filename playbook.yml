@@ -1,0 +1,54 @@
+---
+- hosts:        playground
+  remote_user:  root
+  tasks:
+
+# install basic tools
+  - name:       install git
+    apt:        name=git state=latest update_cache=yes
+
+# install node-based packages
+  - name:       install pm2
+    npm:        name=pm2 global=yes production=yes
+  - name:       install grunt-cli
+    npm:        name=grunt-cli global=yes production=yes
+  - name:       install gulp
+    npm:        name=gulp global=yes production=yes
+  - name:       install bower
+    npm:        name=bower global=yes production=yes
+# install viff
+  - name:       install viff
+    sudo:       yes
+    npm:        name=viff global=yes production=yes
+  - name:       install wdm
+    npm:        name=wdm global=yes production=yes
+  - name:       download selenium driver
+    command:    wdm update
+  - name:       install phantomjs
+    npm:        name=phantomjs global=yes production=yes
+
+# install nginx
+  - name:       install nginx at latest version
+    apt:        pkg=nginx state=installed update_cache=yes
+  - name:       ensure nginx is running
+    service:    name=nginx state=started
+
+# install mongodb
+  - name:       Add mongo ppa key
+    sudo:       yes
+    apt_key: >
+      keyserver=hkp://keyserver.ubuntu.com:80
+      id=7F0CEB10
+      state=present
+  - name:       Add mongo sources list
+    sudo:       yes
+    lineinfile: >
+      line="deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen"
+      dest=/etc/apt/sources.list.d/mongodb.list
+      state=present
+      create=yes
+  - name:       install mongo
+    sudo:       yes
+    apt:        name=mongodb-10gen state=latest update_cache=yes
+  - name:       ensure mongodb is running
+    service:    name=mongodb state=started
