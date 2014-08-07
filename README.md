@@ -12,3 +12,7 @@
 * phantomjs
 * nginx
 * mongodb
+
+## node-pkg-playbook.yml
+| install node from package
+
